@@ -60,7 +60,7 @@ function deleteChildElements()
     while (element.lastElementChild)
     {
         parentElement.removeChild(element);
-        parentElement.lastElementChild.appendChild(element);
+        //parentElement.lastElementChild.appendChild(element);
     }
     return parentElement;
 }
