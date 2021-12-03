@@ -7,3 +7,16 @@ function createElemWithText(elmStrName = "p", textCont = "", className) {
   return elem
   
 }
+
+function createSelectOptions(data = "undefined")
+{
+  if(data == "undefined")
+  {
+	  return data;
+  }
+  else
+  {
+    return data
+  }
+
+}
