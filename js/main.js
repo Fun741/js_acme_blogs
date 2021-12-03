@@ -62,6 +62,6 @@ function deleteChildElements()
         parentElement.removeChild(element);
         parentElement.lastElementChild.appendChild(element);
     }
-    return element;
+    return parentElement;
 }
 
