@@ -8,15 +8,23 @@ function createElemWithText(elmStrName = "p", textCont = "", className) {
   
 }
 
-function createSelectOptions(data = "undefined")
-{
-  if(data == "undefined")
-  {
-	  return data;
-  }
-  else
-  {
-    return data
-  }
-
+function createSelectOptions(user = "undefined") {
+    const newArr = []
+    if (user == "undefined") {
+        return user;
+    }
+    else
+    {
+        for (let i = 0; i < userData.length; i++)
+        {
+            newArr[i] = document.createElement("option");
+            user.id = option.value;
+            user.name = option.textContent;
+        }
+        //userData.forEach((users) => {
+        //    const newElem = document.createElement("div");
+        //});
+    }
+    return newArr;
 }
+
