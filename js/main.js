@@ -56,12 +56,13 @@ function toggleCommentButton() {
 
 function deleteChildElements()
 {
-    let element = parentElement.lastElementChild;
-    while (element.lastElementChild)
+    let child = parentElement.lastElementChild;
+    while (child.firstChild)
     {
-        parentElement.removeChild(element);
-        parentElement.lastElementChild.appendChild(element);
+        child = parentElement.removeChild(child);
+        child = parentElement.lastElementChild(child);
     }
-    return parentElement;
+
+    return parentElem;
 }
 
