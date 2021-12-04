@@ -9,23 +9,15 @@ function createElemWithText(elmStrName = "p", textCont = "", className) {
 }
 
 function createSelectOptions(user = "undefined") {
-    const newArr = []
-    if (user == "undefined") {
-        return user;
-    }
-    else
-    {
-        for (let i = 0; i < userData.length; i++)
-        {
-            newArr[i] = document.createElement("option");
-            user.id = option.value;
-            user.name = option.textContent;
-        }
-        //userData.forEach((users) => {
-        //    const newElem = document.createElement("div");
-        //});
-    }
-    return newArr;
+    const optionArr = [];
+    let i = 0;
+    JsonData.forEach((users) => {
+        newArr[i] = document.createElement("option");
+        user.id = option.value;
+        user.name = option.textContent;
+        i = i + 1;
+    });
+    return optionArr;
 }
 
 function toggleCommentSection()
