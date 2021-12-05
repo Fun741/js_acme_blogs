@@ -20,11 +20,43 @@ function createSelectOptions(user = "undefined") {
     return optionArr;
 }
 
+/*
 function toggleCommentSection()
 {
 
     return;
 }
+*/
+
+function toggleCommentSection(postId)
+{
+    // If Post Id Is Passed, Return Undefined
+    if (!postId) { return undefined; }
+    else
+    {
+        // Else, Get All Comment Sections
+        const commentSections = document.querySelectorAll('[data-post-id]');
+        // Loop Through Each Comment Section
+        for (let i = 0; i < commentSections.length; i++)
+        {
+            const commentSection = commentSections[i];
+            // If Post Id Attribut Of Comment Section Is Equal To Post Id Passed Arg
+            if (commentSection.getAttribute('data-post-id') === postId)
+            {
+                // Toggle Hide Class
+                commentSection.classList.toggle('hide');
+                // Return Comment Section Element
+                return commentSection;
+            }
+        }
+
+        // If We Are Here, No Matching Post Id Is Found
+        // Return NULL
+        return null;
+    }
+}
+
+
 
 //a.Receives a postId as the parameter
 //b.Selects the section element with the data - post - id attribute equal to the postId received as a parameter
