@@ -204,10 +204,10 @@ function getUserPosts() {
 }
 */
 
-async function getUserPosts(userId = "none") {
+async function getUserPosts(userID) {
     try {
-        if (userId == "none") {return}
-        const response = await fetch("https://jsonplaceholder.typicode.com/users/${userID}")
+        if (userID === undefined) { return }
+        const response = await fetch("https://jsonplaceholder.typicode.com/users/${userID}/posts")
         const users = await response.json();
         return users;
     } catch (err) {
