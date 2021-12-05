@@ -155,23 +155,6 @@ e.Await the users data response
 f.Return the JSON data
 */
 
-
-/*
-function getUsers()
-{
-    const setUser = async () => {
-        const response = await fetch("https://jsonplaceholder.typicode.com/users");
-        return await response.json();
-    };
-    return setUser;
-}
-*/
-/*
-const getUsers = async () => {
-    const response = await fetch("https://jsonplaceholder.typicode.com/users");
-    return await response.json();
-};
-*/
 async function getUsers() {
     try
     {
@@ -197,13 +180,6 @@ f.Await the users data response
 g.Return the JSON data
 */
 
-/*
-function getUserPosts() {
-
-    return data;
-}
-*/
-
 async function getUserPosts(userID) {
     try {
         if (userID === undefined) { return }
@@ -227,6 +203,7 @@ e.Uses the fetch API to request the user
 f.Await the user data response
 g.Return the JSON data
 */
+
 async function getUser(userID) {
     try {
         if (userID === undefined) { return }
@@ -253,7 +230,7 @@ g.Return the JSON data
 
 async function getPostComments(postID) {
     try {
-        if (userID === undefined) { return }
+        if (postID === undefined) { return }
         const response = await fetch("https://jsonplaceholder.typicode.com/posts/" + postID + "/comments")
         const user = await response.json();
         return user;
