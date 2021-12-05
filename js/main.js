@@ -7,7 +7,7 @@ function createElemWithText(elmStrName = "p", textCont = "", className) {
   return elem
   
 }
-
+/*
 function createSelectOptions(user = "undefined") {
     const optionArr = [];
     let i = 0;
@@ -19,6 +19,14 @@ function createSelectOptions(user = "undefined") {
     });
     return optionArr;
 }
+*/
+
+function createSelectOptions(params)
+{
+   // returns the option data from params object
+   return params.map((x) => x.option);
+}
+
 
 /*
 function toggleCommentSection()
