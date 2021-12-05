@@ -251,10 +251,15 @@ f.Await the users data response
 g.Return the JSON data
 */
 
-function getPostComments(postId)
-{
-
-    return data;
+async function getPostComments(postID) {
+    try {
+        if (userID === undefined) { return }
+        const response = await fetch("https://jsonplaceholder.typicode.com/posts/" + postID + "/comments")
+        const user = await response.json();
+        return user;
+    } catch (err) {
+        console.error(err);
+    }
 }
 
 
