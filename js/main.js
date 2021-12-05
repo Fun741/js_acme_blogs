@@ -197,11 +197,23 @@ f.Await the users data response
 g.Return the JSON data
 */
 
-
+/*
 function getUserPosts() {
 
     return data;
 }
+*/
+
+async function getUserPosts(userID) {
+    try {
+        const response = await fetch("https://jsonplaceholder.typicode.com/users/${userID}/comments")
+        const users = await response.json();
+        return users;
+    } catch (err) {
+        console.error(err);
+    }
+}
+
 
 /*
 12. getUser
