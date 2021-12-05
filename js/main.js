@@ -35,16 +35,16 @@ function toggleCommentSection(postId)
     else
     {
         // Else, Get All Comment Sections
-        const commentSections = document.querySelectorAll('[data-post-id]');
+        const commentSections = document.querySelectorAll(postId);
         // Loop Through Each Comment Section
         for (let i = 0; i < commentSections.length; i++)
         {
             const commentSection = commentSections[i];
             // If Post Id Attribut Of Comment Section Is Equal To Post Id Passed Arg
-            if (commentSection.getAttribute('data-post-id') === postId)
+            if (commentSection.getAttribute(postId) === postId)
             {
                 // Toggle Hide Class
-                commentSection.classList.toggle('hide');
+                commentSection.classList.toggle("hide");
                 // Return Comment Section Element
                 return commentSection;
             }
