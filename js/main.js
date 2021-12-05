@@ -227,10 +227,15 @@ e.Uses the fetch API to request the user
 f.Await the user data response
 g.Return the JSON data
 */
-
-function getUser() {
-
-    return data;
+async function getUser(userID) {
+    try {
+        if (userID === undefined) { return }
+        const response = await fetch("https://jsonplaceholder.typicode.com/users/" + userID)
+        const user = await response.json();
+        return user;
+    } catch (err) {
+        console.error(err);
+    }
 }
 
 
