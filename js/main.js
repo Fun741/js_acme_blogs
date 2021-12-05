@@ -155,6 +155,8 @@ e.Await the users data response
 f.Return the JSON data
 */
 
+
+/*
 function getUsers()
 {
     const setUser = async () => {
@@ -163,6 +165,12 @@ function getUsers()
     };
     return setUser;
 }
+*/
+
+const getUsers = async () => {
+    const response = await fetch("https://jsonplaceholder.typicode.com/users");
+    return await response.json();
+};
 
 
 /*
