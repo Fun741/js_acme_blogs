@@ -166,11 +166,23 @@ function getUsers()
     return setUser;
 }
 */
-
+/*
 const getUsers = async () => {
     const response = await fetch("https://jsonplaceholder.typicode.com/users");
     return await response.json();
 };
+*/
+async function getUsers() {
+    try
+    {
+        const response = await fetch("https://jsonplaceholder.typicode.com/users")
+        const users = await response.json();
+        return users;
+    } catch (err)
+    {
+        console.error(err);
+    }
+}
 
 
 /*
