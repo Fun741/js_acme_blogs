@@ -21,10 +21,26 @@ function createSelectOptions(user = "undefined") {
 }
 */
 
-function createSelectOptions(params)
-{
-   // returns the option data from params object
-   return params.map((x) => x.option);
+function createSelectOptions(users) {
+    //d. Returns undefined if no parameter received
+    if (!users) { return undefined; }
+    let optionArray = [];
+    //e. Loops through the users data
+    for (let i = 0; i < users.length; i++)
+    {
+        const u = users[i];
+        //f. Creates an option element for each user with document.createElement()
+        let option = document.createElement("option");
+        //g. Assigns the user.id to the option.value
+        option.value = u.id;
+        //h. Assigns the user.name to the option.textContent
+        option.textContent = u.name;
+        optionArray.push(option);
+    }
+    //i. Return an array of options elements
+    return optionArray;
+
+    return array;
 }
 
 
