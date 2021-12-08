@@ -208,9 +208,23 @@ g.Return the selectMenu element
 */
 
 //READ FIRST
-function populateSelectMenu(JsonData)
-{
-
+function populateSelectMenu(users) {
+    if (!users) {return undefined;}
+    //  b. Receives the users JSON data as a parameter
+    //  c. Selects the #selectMenu element by id
+    let selectMenu = document.getElementById("selectMenu");
+    //  d. Passes the users JSON data to createSelectOptions()
+    //  e. Receives an array of option elements from createSelectOptions
+    let options = createSelectOptions(user);
+    //  f. Loops through the options elements and appends each option element to the select menu
+    for (let i = 0; i < options.length; i++)
+    {
+        const o = options[i];
+        let option = document.createElement("option");
+        option.innerText = o;
+        selectMenu.appendChild(option);
+    }
+    //  g. Return the selectMenu element
     return selectMenu;
 }
 
