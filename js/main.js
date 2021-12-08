@@ -72,7 +72,7 @@ function toggleCommentSection(postId) {
     //e.Toggles the class 'hide' on the section element
 
     //f.Return the section element
-    return section;
+    return NULL;
 }
 
 
