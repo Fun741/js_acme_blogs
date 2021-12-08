@@ -54,25 +54,32 @@ e.Toggles the class 'hide' on the section element
 f.Return the section element
 */
 //a.Receives a postId as the parameter
-function toggleCommentSection(postId) {
+function toggleCommentSection(postId)
+{
+    // If Post Id Is Passed, Return Undefined
     if (!postId) { return undefined; }
-    //b.Selects the section element with the data - post - id attribute equal to the postId received as a parameter
-    const sections = document.querySelectorAll('[data-post-id]');
-    //c.Use code to verify the section exists before attempting to access the classList property
-    for (let i = 0; i < commentSections.length; i++)
+    else
     {
-        if (sections[i].getAttribute('[data-post-id]') === postId)
+        // Else, Get All Comment Sections
+        const commentSections = document.querySelectorAll('[data-post-id]');
+        // Loop Through Each Comment Section
+        for (let i = 0; i < commentSections.length; i++)
         {
-            commentSection.classList.toggle('hide');
-            // Return Comment Section Element
-            return commentSection;
+            const commentSection = commentSections[i];
+            // If Post Id Attribut Of Comment Section Is Equal To Post Id Passed Arg
+            if (commentSection.getAttribute('data-post-id') === postId)
+            {
+                // Toggle Hide Class
+                commentSection.classList.toggle('hide');
+                // Return Comment Section Element
+                return commentSection;
+            }
         }
-    }
-    //d.At this point in your code, the section will not exist.You can create one to test if desired.
-    //e.Toggles the class 'hide' on the section element
 
-    //f.Return the section element
-    return NULL;
+        // If We Are Here, No Matching Post Id Is Found
+        // Return NULL
+        return null;
+    }
 }
 
 
@@ -142,9 +149,17 @@ waiting on the logic inside the toggleComments function until we get there.
 
 function addButtonListeners()
 {
-    let btnElm;
+    var buttons = document.getElementById("main").querySelectorAll("button");
+    let sel = [];
+    if (!buttons) { return undefined; }
 
-    return btnElm;
+    for (let i = 0; i < buttons.length; i++) {
+        let button = buttons[i];
+        postId = button.dataset.id;
+        button.addEventListener("click", function (e) { toggleComments(e, postId) }, false);
+        sel.push(button);
+    }
+    return sel;
 }
 
 /*
@@ -182,11 +197,33 @@ l.Return the fragment element
 */
 
 //READ FIRST
-function createComments(JsonData)
-{
-    let fragElm;
-
-    return fragElm;
+function createComments(comments) {
+    //The function createComments should return undefined if it does not receive a parameter.
+    if (!comments) { return undefined; }
+    // b. Receives JSON comments data as a parameter
+    // c. Creates a fragment element with document.createDocumentFragment()
+    let frag = document.createDocumentFragment();
+    // d.Loop through the comments
+    for (let i = 0; i < comments.length; i++) {
+        const element = comments[i];
+        // e. For each comment do the following:
+        // f. Create an article element with document.createElement()
+        let a = document.createElement("a");
+        // g. Create an h3 element with createElemWithText('h3', comment.name)
+        let h3 = createElemWithText("h3", comment.name);
+        // h. Create an paragraph element with createElemWithText('p', comment.body)
+        let p1 = createElemWithText("p", comment.body);
+        // i. Create an paragraph element with createElemWithText('p', `From: ${comment.email}`)
+        let p2 = createElemWithText("p", `From: ${comment.email}`);
+        // j. Append the h3 and paragraphs to the article element (see cheatsheet)
+        a.appendChild(h3);
+        a.appendChild(p);
+        a.appendChild(p);
+        // k. Append the article element to the fragment
+        frag.appendChild(a);
+    }
+    // l. Return the fragment element
+    return frag;
 }
 
 
@@ -204,6 +241,7 @@ g.Return the selectMenu element
 
 //READ FIRST
 function populateSelectMenu(users) {
+    //The function createComments should return undefined if it does not receive a parameter.
     if (!users) {return undefined;}
     //  b. Receives the users JSON data as a parameter
     //  c. Selects the #selectMenu element by id
