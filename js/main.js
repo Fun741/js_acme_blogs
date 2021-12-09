@@ -82,15 +82,23 @@ function toggleCommentButton() {
 //e.Reassign child to parentElement.lastElementChild in the loop
 //f.Return the parentElement
 
-function deleteChildElements(parentElement)
+//a.Receives a parentElement as a parameter
+function deleteChildElements(parentElement = ' ')
 {
-    if (parentElement == undefined || parentElement == ' ') { return undefined; }
-
+    if (parentElement == undefined || parentElement == ' ') {
+        // return normal html
+        return undefined;
+    }
+    //b.Define a child variable as parentElement.lastElementChild
     let child = parentElement.lastElementChild;
+    //While the child exists…(use a while loop)
     while (child) {
+        //d.Use parentElement.removeChild to remove the child in the loop
         parentElement.removeChild(child);
+        //e.Reassign child to parentElement.lastElementChild in the loop
         child = parentElement.lastElementChild;
     }
+    //f.Return the parentElement
     return parentElement;
 }
 
