@@ -94,29 +94,18 @@ function toggleCommentButton() {
 //e.Reassign child to parentElement.lastElementChild in the loop
 //f.Return the parentElement
 
+function remove() {
+    deleteChildElements(document.getElementById("div"));
+}
+
 function deleteChildElements(parentElement)
 {
-    // if element is undefined
-    if (parentElement == undefined || parentElement == ' ')
-    {
-        // return normal html
-        return undefined;
-    }
-    else
-    {
-        // iterate until element has chile
-        while (parentElement.hasChildNodes())
-        {
-            // iterete until element child has child
-            while (parentElement.lastElementChild.hasChildNodes())
-            {
-                // remove child from first
-                //console.log(parentElement.lastElementChild.removeChild(parentElement.lastElementChild.firstChild));
-                parentElement.lastElementChild.removeChild(parentElement.lastElementChild.firstChild);
-            }
-            // remove element
-            html_element.removeChild(parentElement.lastElementChild);
-        }
+    if (!parentElement) { return undefined; }
+
+    let child = parentElement.lastElementChild;
+    while (child) {
+        parentElement.removeChild(child);
+        child = parentElement.lastElementChild;
     }
     return parentElement;
 }
