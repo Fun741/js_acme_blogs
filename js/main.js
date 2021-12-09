@@ -192,7 +192,7 @@ function createComments(comments) {
     if (!comments) { return undefined; }
     // b. Receives JSON comments data as a parameter
     // c. Creates a fragment element with document.createDocumentFragment()
-    let frag = document.createDocumentFragment();
+    let fragmenet = document.createDocumentFragment();
     // d.Loop through the comments
     for (let i = 0; i < comments.length; i++) {
         const element = comments[i];
@@ -207,13 +207,13 @@ function createComments(comments) {
         let p2 = createElemWithText('p', 'From: ${comment.email}');
         // j. Append the h3 and paragraphs to the article element (see cheatsheet)
         a.appendChild(h3);
-        a.appendChild(p);
-        a.appendChild(p);
+        a.appendChild(p1);
+        a.appendChild(p2);
         // k. Append the article element to the fragment
-        frag.appendChild(a);
+        fragmenet.appendChild(a);
     }
     // l. Return the fragment element
-    return frag;
+    return fragmenet;
 }
 
 
