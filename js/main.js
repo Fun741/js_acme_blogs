@@ -100,7 +100,7 @@ function remove() {
 
 function deleteChildElements(parentElement)
 {
-    //if (!parentElement) { return undefined; }
+    if (parentElement == undefined || html_element == ' ') { return undefined; }
 
     let child = parentElement.lastElementChild;
     while (child) {
