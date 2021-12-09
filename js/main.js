@@ -198,13 +198,13 @@ function createComments(comments) {
         const element = comments[i];
         // e. For each comment do the following:
         // f. Create an article element with document.createElement()
-        let a = document.createElement("a");
+        let a = document.createElement('a');
         // g. Create an h3 element with createElemWithText('h3', comment.name)
-        let h3 = createElemWithText("h3", comment.name);
+        let h3 = createElemWithText('h3', comment.name);
         // h. Create an paragraph element with createElemWithText('p', comment.body)
-        let p1 = createElemWithText("p", comment.body);
-        // i. Create an paragraph element with createElemWithText('p', `From: ${comment.email}`)
-        let p2 = createElemWithText("p", `From: ${comment.email}`);
+        let p1 = createElemWithText('p', comment.body);
+        // i. Create an paragraph element with createElemWithText('p', 'From: ${comment.email}')
+        let p2 = createElemWithText('p', 'From: ${comment.email}');
         // j. Append the h3 and paragraphs to the article element (see cheatsheet)
         a.appendChild(h3);
         a.appendChild(p);
