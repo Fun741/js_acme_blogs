@@ -192,7 +192,7 @@ function createComments(comments) {
     if (!comments) { return undefined; }
     // b. Receives JSON comments data as a parameter
     // c. Creates a fragment element with document.createDocumentFragment()
-    let fragmenet = document.createDocumentFragment();
+    let fragmenet = new DocumentFragment();
     // d.Loop through the comments
     for (let i = 0; i < comments.length; i++) {
         const element = comments[i];
