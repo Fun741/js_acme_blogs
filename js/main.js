@@ -204,17 +204,18 @@ function createComments(comments) {
         // h. Create an paragraph element with createElemWithText('p', comment.body)
         let p1 = createElemWithText('p', comment.body);
         // i. Create an paragraph element with createElemWithText('p', 'From: ${comment.email}')
-        let p2 = createElemWithText('p', 'From: ${comment.email}');
+        let p2 = createElemWithText('p', 'From: ' + comment.email);
         // j. Append the h3 and paragraphs to the article element (see cheatsheet)
-        a.appendChild(h3);
-        a.appendChild(p1);
-        a.appendChild(p2);
+        a.append(h3, p1, p2);
+        //a.appendChild(p);
+        //a.appendChild(p);
         // k. Append the article element to the fragment
-        fragmenet.appendChild(a);
+        fragmenet.append(a);
     }
     // l. Return the fragment element
     return fragmenet;
 }
+
 
 
 /*
