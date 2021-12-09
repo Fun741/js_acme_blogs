@@ -56,28 +56,25 @@ f.Return the section element
 //a.Receives a postId as the parameter
 function toggleCommentSection(postId)
 {
-    // If Post Id Is Passed, Return Undefined
     if (!postId) { return undefined; }
-    else
-    {
-        // Else, Get All Comment Sections
-        const commentSections = document.querySelectorAll('[data-post-id]');
-        // Loop Through Each Comment Section
-        for (let i = 0; i < commentSections.length; i++)
-        {
-            const commentSection = commentSections[i];
-            // If Post Id Attribut Of Comment Section Is Equal To Post Id Passed Arg
-            if (commentSection.getAttribute('data-post-id') === postId)
-            {
-                // Toggle Hide Class
+    else {
+
+
+        //b.Selects the section element with the data - post - id attribute equal to the postId received as a parameter
+        const sections = document.querySelector('[data-post-id]');
+        //c.Use code to verify the section exists before attempting to access the classList property
+        for (let i = 0; i < commentSections.length; i++) {
+            //c.Use code to verify the section exists before attempting to access the classList property
+            if (sections[i].getAttribute('[data-post-id]') === postId) {
                 commentSection.classList.toggle('hide');
                 // Return Comment Section Element
                 return commentSection;
             }
         }
+        //d.At this point in your code, the section will not exist.You can create one to test if desired.
+        //e.Toggles the class 'hide' on the section element
 
-        // If We Are Here, No Matching Post Id Is Found
-        // Return NULL
+        //f.if it does not exist return null
         return null;
     }
 }
