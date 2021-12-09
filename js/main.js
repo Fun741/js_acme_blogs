@@ -86,7 +86,7 @@ function toggleCommentButton() {
     return;
 }
 
- 
+// 5. deleateChileElements 
 //a.Receives a parentElement as a parameter
 //b.Define a child variable as parentElement.lastElementChild
 //c.While the child exists…(use a while loop)
@@ -100,7 +100,7 @@ function remove() {
 
 function deleteChildElements(parentElement)
 {
-    if (!parentElement) { return undefined; }
+    //if (!parentElement) { return undefined; }
 
     let child = parentElement.lastElementChild;
     while (child) {
