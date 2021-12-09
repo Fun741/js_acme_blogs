@@ -7,19 +7,7 @@ function createElemWithText(elmStrName = "p", textCont = "", className) {
   return elem
   
 }
-/*
-function createSelectOptions(user = "undefined") {
-    const optionArr = [];
-    let i = 0;
-    JsonData.forEach((users) => {
-        newArr[i] = document.createElement("option");
-        user.id = option.value;
-        user.name = option.textContent;
-        i = i + 1;
-    });
-    return optionArr;
-}
-*/
+
 
 function createSelectOptions(users) {
     //d. Returns undefined if no parameter received
@@ -93,10 +81,6 @@ function toggleCommentButton() {
 //d.Use parentElement.removeChild to remove the child in the loop
 //e.Reassign child to parentElement.lastElementChild in the loop
 //f.Return the parentElement
-
-function remove() {
-    deleteChildElements(document.getElementById("div"));
-}
 
 function deleteChildElements(parentElement)
 {
