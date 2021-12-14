@@ -12,12 +12,23 @@ g. Use document.createElement() to create the requested HTML element
 h. Set the other desired element attributes.
 i. Return the created element.
 */
+
+//a. Receives up to 3 parameters
+//b. 1st parameter is the HTML element string name to be created(h1, p, button, etc)
+//c.Set a default value for the 1st parameter to “p”
+//d. 2nd parameter is the textContent of the element to be created
+//e.Default value of the 2nd parameter is “”
+//f. 3rd parameter is a className if one is to be applied(optional)
 function createElemWithText(elmStrName = "p", textCont = "", className)
 {
+    //g. Use document.createElement() to create the requested HTML element
     const elem = document.createElement(elmStrName);
+    //h. Set the other desired element attributes.
     elem.textContent = textCont;
+    //if className exists add classname
     if (className)
         elem.classList.add(className);
+    //i.Return the created element.
     return elem
 }
 
@@ -32,26 +43,30 @@ function createElemWithText(elmStrName = "p", textCont = "", className)
 //h.Assigns the user.name to the option.textContent
 //i.Return an array of options elements
 
+//a.Test users JSON data available here: https://jsonplaceholder.typicode.com/users
+//b.For testing(not in function) you may want to define users with the test data.
+//c.Receives users JSON data as a parameter
 function createSelectOptions(users) {
     //d. Returns undefined if no parameter received
     if (!users) { return undefined; }
 
-    let optionArray = [];
+    //create array to return
+    let options = [];
     //e. Loops through the users data
     for (let i = 0; i < users.length; i++) {
-        const u = users[i];
+        const user = users[i];
         //f. Creates an option element for each user with document.createElement()
         let option = document.createElement("option");
         //g. Assigns the user.id to the option.value
-        option.value = u.id;
+        option.value = user.id;
         //h. Assigns the user.name to the option.textContent
-        option.textContent = u.name;
-        optionArray.push(option);
+        option.textContent = user.name;
+        //add var to return array
+        options.push(option);
     }
     //i. Return an array of options elements
-    return optionArray;
+    return options;
 
-    return array;
 }
 
 /*
@@ -166,6 +181,7 @@ function addButtonListeners()
     let btns = document.querySelectorAll("main button");
     //if no buttons return undef
     if (!btns) { return undefined; }
+    //b.If buttons exist:
     else {
         //c.Loop through the NodeList of buttons
         for (let i = 0; i < btns.length; i++) {
@@ -181,6 +197,7 @@ function addButtonListeners()
         //h.Return the button elements which were selected
         return btns;
     }
+    //spare return incase of faliar
     return btns;
 }
 
@@ -204,7 +221,7 @@ function removeButtonListeners() {
         //b.Loops through the NodeList of buttons
         for (let i = 0; i < btns.length; i++) {
             let button = btns[i];
-            //d.Gets the postId from button.dataset.id
+            //c.Gets the postId from button.dataset.id
             let postId = button.dataset.postId;
             //d.Removes the click event listener from each button(reference removeEventListener)
             //e.Refer to the addButtonListeners function as this should be nearly identical
@@ -240,37 +257,38 @@ function createComments(comments)
     if (!comments) { return undefined; }
 
     //c.Creates a fragment element with document.createDocumentFragment()
-    var fragment = document.createDocumentFragment();
+    let fragment = document.createDocumentFragment();
 
     //d.Loop through the comments
     
     for (let i = 0; i < comments.length; i++)
     {
-        let comment = comments[i];
         // e. For each comment do the following:
         // f. Create an article element with document.createElement()
-        const art = document.createElement('a');
+        let article = document.createElement("a");
         // g. create an h3 element with createElemWithText('h3',comment.name)
-        const h3 = createElemWithText('h3', comment.name);
+        let h3 = createElemWithText('h3', comments[i].name);
         // h. Create an paragraph element with createElemWithText('p', comment.body)
-        const p1 = createElemWithText('p', comment.body);
+        let p1 = createElemWithText('p', comments[i].body);
         // i. Create an paragraph element with createElemWithText('p', `From: ${comment.email}`)
-        const p2 = createElemWithText('p', `From: ${comment.email}`);
+        let p2 = createElemWithText('p', `From: ${comments[i].email}`);
         // j.Append the h3 and paragraphs to the article element (see cheatsheet)
-        //art.append(h3, p1, p2);
-        art.append(h3);
-        art.append(p1);
-        art.append(p2);
+
+        //this works
+        article.append(h3, p1, p2);
 
         //The function createComments should create and append one article element to the fragment for each comment.
         // k. Append the article element to the fragment
-        fragment.append(art);
+
+        //this does not?????
+        fragment.append(article);
     }
     //l.Return the fragment element
     return fragment;
 }
+    
 
-
+    
 
 
 /*
@@ -317,7 +335,7 @@ f.Return the JSON data
 */
 
 //b.Should be an async function
-async function getUsers() {
+const getUsers = async () => {
     //c.Should utilize a try / catch block
     try
     {
@@ -349,17 +367,18 @@ g.Return the JSON data
 
 //a.Receives a user id as a parameter
 //c.Should be an async function
-async function getUserPosts(userID) {
+const getUserPosts = async (userID) => {
     //d.Should utilize a try / catch block
     try {
-        if (userID === undefined) { return }
+        if (!userID) { return undefined; }
         //b.Fetches post data for a specific user id from:https://jsonplaceholder.typicode.com/ (look at Routes section)
         const response = await fetch("https://jsonplaceholder.typicode.com/users/" + userID + "/posts");
         //f.Await the users data response
         const user = await response.json();
         //g.Return the JSON data
         return user;
-    } catch (err) {
+    } catch (err)
+    {
         console.error(err);
     }
 }
@@ -377,17 +396,18 @@ g.Return the JSON data
 */
 //a.Receives a user id as a parameter
 //c.Should be an async function
-async function getUser(userID) {
+const getUser = async (userID) => {
     //d.Should utilize a try / catch block
     try {
-        if (userID === undefined) { return }
+        if (!userID) { return undefined; }
         //e.Uses the fetch API to request the user
         const response = await fetch("https://jsonplaceholder.typicode.com/users/" + userID);
         //f.Await the user data response
         const user = await response.json();
         //g.Return the JSON data
         return user;
-    } catch (err) {
+    } catch (err)
+    {
         console.error(err);
     }
 }
@@ -406,10 +426,10 @@ g.Return the JSON data
 */
 //a.Receives a post id as a parameter
 //c.Should be an async function
-async function getPostComments(postID) {
+const getPostComments = async (postID) => {
     //d.Should utilize a try / catch block
     try {
-        if (postID === undefined) { return }
+        if (!postID) { return undefined; }
         //b.Fetches comments for a specific post id from:
         //e.Uses the fetch API to request all users
         const response = await fetch("https://jsonplaceholder.typicode.com/posts/" + postID + "/comments");
@@ -417,7 +437,8 @@ async function getPostComments(postID) {
         const user = await response.json();
         //g.Return the JSON data
         return user;
-    } catch (err) {
+    } catch (err)
+    {
         console.error(err);
     }
 }
@@ -437,17 +458,21 @@ i.Append the fragment to the section
 j.Return the section element
 */
 
+//const section = document.querySelector(`section[data-post-id = "${postID}"`);
 
 //a.Dependencies: getPostComments, createComments
 //b.Is an async function
 //c.Receives a postId as a parameter
 const displayComments = async (postId) => {
     //return undef if no postID
-    if (postId == undefined) { return undef}
+    if (!postId) { return undefined; }
     //d.Creates a section element with document.createElement()
-    section = document.createElement();
+    section = document.createElement('section');
     //e.Sets an attribute on the section element with section.dataset.postId
-    section.setAttribute(section.dataset.postId);
+    section.dataset.postId = postId;
+
+    //The function displayComments should create and return a section element with the correct attributes and classes.
+    //The function displayComments should create and return a section element with all comments for the given post ID appended.
 
     //f.Adds the classes 'comments' and 'hide' to the section element
     //element.classList.add("newClass");
@@ -456,7 +481,9 @@ const displayComments = async (postId) => {
 
     //g.Creates a variable comments equal to the result of await getPostComments(postId);
     let comments = await getPostComments(postId);
+
     //h.Creates a variable named fragment equal to createComments(comments)
+    //not working because create comment not working 
     let fragment = createComments(comments);
 
     //i.Append the fragment to the section
@@ -495,44 +522,65 @@ t.Return the fragment element
 //a.Dependencies: createElemWithText, getUser, displayComments
 //b.Is an async function
 //c.Receives posts JSON data as a parameter
-
 const createPosts = async (posts) => {
-    //d.Create a fragment element with document.createDocumentFragment()
+    //if posts not exist return undef
     if (!posts) { return undefined; }
-    fragment = document.createDocumentFragment();
+
+    //d.Create a fragment element with document.createDocumentFragment()
+    let fragment = document.createDocumentFragment();
+
+    
     //e.Loops through the posts data
-    /*for (let i = 0; i < posts; i++)
+    for (let i = 0; i < posts; i++)
     {
+        //The function createPosts should create an h2, 4 paragraphs, a button, and a section element
+        //, and then append each element to the parent article element in that specific order.
+        //The function createPosts should create an h2, 4 paragraphs, a button, and a section element and assign 
+        //the desired textContent and attributes per the project instructions.
+        //createElemWithText('p', `From: ${comments[i].email}`);
+
         //f.For each post do the following:
+        let post = posts[i];
         //g.Create an article element with document.createElement()
-        const article = document.createElement("a");
+        let article = document.createElement("a");
         //h.Create an h2 element with the post title
-        const h2 = document.createElement("h2");
+        let h2 = createElemWithText('h2', post.title);
         //i.Create an p element with the post body
-        const p = document.createElement("p");
+        let p1 = createElemWithText('p', post.body);
         //j.Create another p element with text of`Post ID: ${post.id}`
-        const p2 = document.createElement("p").textContent = 'Post ID: ' + post.id;
+        let p2 = createElemWithText('p', `Post ID: ${post.id}`);
         //k.Define an author variable equal to the result of await getUser(post.userId)
-        var author = await getUser(post.userId);
+        let author = await getUser(post.userId);
         //l.Create another p element with text of`Author: ${author.name} with ${author.company.name}`
-        const p3 = document.createElement("p").textContent = 'Author: ' + author.name + ' with ' + ' author.company.name';
+        let p3 = createElemWithText('p', `Author: ${author.name} with ${author.company.name}`);
+
+        //?????????????????????
+        //have no idea how I am suposed to get this
         //m.Create another p element with the author’s company catch phrase.
-        const p4 = document.createElement("p").textContent = 'Catch phrase: Writing is all I need.';
+        let p4 = createElemWithText('p', `${author.company.phrase}`);
+
+
         //n.Create a button with the text 'Show Comments'
-        const button = document.createElement("button");
+        let button = createElemWithText('button', 'show comments');
         //o.Set an attribute on the button with button.dataset.postId = post.id
-        button.setAttribute(button.dataset.postId = post.id);
+        button.dataset.postId = post.id;
         //p.Append the h2, paragraphs, button, and section elements you have created to the article element.
-        article.append(h2, p, p2, author, p3, p4, button);
+        //h2, 4 paragraphs, a button, and a section element
+        article.append(h2, p1, p2, p3, p4, button);
+
+
         //q.Create a variable named section equal to the result of await displayComments(post.id);
-        var sectionequal = await displayComments(post.id);
+        //not working because createComments not working--displayCommnets not working
+        var section = await displayComments(post.id);
+
         //r.Append the section element to the article element
-        a.append(sectionequal);
+        article.append(section);
+
+        //s.After the loop completes, append the article element to the fragment
+        //was not entirely sure where this went
+        fragment.append(article);
     }
-    //s.After the loop completes, append the article element to the fragment
-    fragment.append(a);
     //t.Return the fragment element
-    */
     return fragment;
 }
 
@@ -556,15 +604,17 @@ g.Returns the element variable
 //b.Is an async function
 //c.Receives posts data as a parameter
 const displayPosts = async (posts) => {
+    
     //d.Selects the main element
-    if (!posts) { return undefined; }
-
     let main = document.querySelector("main");
+
     //e.Defines a variable named element that is equal to:
     //i.IF posts exist: the element returned from await createPosts(posts)
     //ii.IF post data does not exist: create a paragraph element that is identical to the default paragraph found in the html file.
     //iii.Optional suggestion: use a ternary for this conditional
+    //not workiing bacuse createPosts not working
     let element = (posts) ? await createPosts(posts) : document.querySelector("main p");
+
     //f.Appends the element to the main element
     main.append(element);
     //g.Returns the element variable
@@ -630,7 +680,6 @@ k.Result of addButtonListeners is the buttons returned from this function
 //a.Dependencies: removeButtonListeners, deleteChildElements, displayPosts, addButtonListeners
 //b.Is an async function
 //c.Receives posts JSON data as a parameter
-
 const refreshPosts = async (posts) => {
     //if posts not exist return undef
     if (!posts) { return undefined; }
@@ -639,14 +688,16 @@ const refreshPosts = async (posts) => {
     let removeButtons = removeButtonListeners();
     //f.Call deleteChildElements with the main element passed in as the parameter
     let main = deleteChildElements(document.querySelector("main"));
+
     //h.Passes posts JSON data to displayPosts and awaits completion
     //i.Result of displayPosts is a document fragment
+    //not working because displayPosts-createComments not working
     let fragment = await displayPosts(posts);
     //j.Call addButtonListener
     //k.Result of addButtonListeners is the buttons returned from this function
     let addButtons = addButtonListeners();
     //l.Return an array of the results from the functions called: [removeButtons, main, fragment, addButtons]
-    return [removeButtons, myMain, fragment, addButtons];
+    return [removeButtons, main, fragment, addButtons];
 }
 
 /*
@@ -662,17 +713,20 @@ h.Result is the refreshPostsArray
 i.Return an array with the userId, posts and the array returned from refreshPosts:
 [userId, posts, refreshPostsArray]
 */
+
 //a.Dependencies: getUserPosts, refreshPosts
 //b.Should be an async function
 //c.Automatically receives the event as a parameter(see cheatsheet)
 const selectMenuChangeEventHandler = async (e) => {
     //d.Defines userId = event.target.value || 1; (see cheatsheet)
+    //i think
     let userId = e?.target?.value || 1;
     //e.Passes the userId parameter to await getUserPosts
     //f.Result is the posts JSON data
     let posts = await getUserPosts(userId);
     //g.Passes the posts JSON data to await refreshPosts
     //h.Result is the refreshPostsArray
+    //not working becasue refrechPosts not working--createComments not working
     let refreshPostsArray = await refreshPosts(posts);
     //i.Return an array with the userId, posts and the array returned from refreshPosts:[userId, posts, refreshPostsArray]
     return [userId, posts, refreshPostsArray];
@@ -682,14 +736,15 @@ const selectMenuChangeEventHandler = async (e) => {
 20. initPage
 a.Dependencies: getUsers, populateSelectMenu
 b.Should be an async function
-    c.No parameters.
-        d.Call await getUsers
+c.No parameters.
+d.Call await getUsers
 e.Result is the users JSON data
 f.Passes the users JSON data to the populateSelectMenu function
-    g.Result is the select element returned from populateSelectMenu
+g.Result is the select element returned from populateSelectMenu
 h.Return an array with users JSON data from getUsers and the select element
 result from populateSelectMenu: [users, select]
 */
+
 //a.Dependencies: getUsers, populateSelectMenu
 //b.Should be an async function
 //c.No parameters.
@@ -721,10 +776,12 @@ function initApp() {
     //b.Call the initPage() function.
     initPage();
     //c.Select the #selectMenu element by id
-    let select = document.getElementById("selectMenu");
-    //d.Add an event listener to the #selectMenu for the “change” event fires for the #selectMenu
-    select.addEventListener("change", selectMenuChangeEventHandler, false);
+    let selectMenu = document.getElementById("selectMenu");
 
+    //d.Add an event listener to the #selectMenu for the “change” event fires for the #selectMenu
+    //e.The event listener should call selectMenuChangeEventHandler when the change event fires for the #selectMenu
+    //not workong becasue selectMenuChangeEventHandler--createComments not working
+    selectMenu.addEventListener("change", selectMenuChangeEventHandler, false);
 
     //NOTE: All of the above needs to be correct for you app to function correctly.
     //However, I can only test if the initApp function exists.It does not return anything.
@@ -735,6 +792,7 @@ function initApp() {
 //2. Listen for the “DOMContentLoaded” event.
 //3. Put initApp in the listener as the event handler function.
 //4. This will call initApp after the DOM content has loaded and your app will be started.
+// true or false-----i have false
 
 document.addEventListener("DOMContentLoaded", initApp, false);
 
